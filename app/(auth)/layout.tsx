@@ -1,0 +1,16 @@
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-8">
+      <div className="w-full max-w-[420px]">
+        <div className="mb-6 text-center">
+          <h1 className="text-4xl font-extrabold text-[var(--duo-green)]">Úlgi</h1>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,158 @@
+export const kk = {
+  nav: {
+    feed: "Лента",
+    announcements: "Хабарландырулар",
+    create: "Жариялау",
+    assistant: "Көмекші",
+    profile: "Профиль",
+  },
+
+  auth: {
+    login: "Кіру",
+    register: "Тіркелу",
+    phonePlaceholder: "Телефон нөміріңді жаз",
+    pickUsername: "Username таңда",
+    whatsYourName: "Атыңды жаз",
+    yourClass: "Сыныбыңды таңда",
+    done: "Дайын!",
+    fullName: "Аты-жөні",
+    phone: "Телефон нөмірі",
+    password: "Құпия сөз",
+    confirmPassword: "Құпия сөзді қайтала",
+    passwordTooShort: "Құпия сөз кемінде 6 таңба",
+    passwordMismatch: "Құпия сөздер сәйкес келмейді",
+    wrongCredentials: "Нөмір немесе құпия сөз қате",
+    phoneExists: "Бұл нөмір тіркелген",
+    noAccount: "Аккаунт жоқ па?",
+    hasAccount: "Аккаунтың бар ма?",
+    uploadAvatar: "Фото жүктеу",
+    bioPlaceholder: "Өзің туралы айтып бер...",
+    usernameTaken: "Бұл username бос емес",
+    usernameAvailable: "Бос!",
+    checkingUsername: "Тексерілуде...",
+    completeTitle: "Профильді толтыр",
+    phoneTooShort: "Нөмірді толық жаз",
+    requiredField: "Міндетті өріс",
+    submitting: "Күте тұр...",
+  },
+
+  feed: {
+    whatsNew: "Не жаңалық?",
+    empty: "Әзірге бос — бірінші бол!",
+    loading: "Жүктелуде...",
+    like: "Ұнату",
+    comment: "Пікір",
+    share: "Бөлісу",
+    delete: "Жою",
+    report: "Шағымдану",
+    justNow: "жаңа ғана",
+    minutesAgo: "мин бұрын",
+    hoursAgo: "сағ бұрын",
+    yesterday: "кеше",
+    daysAgo: "күн бұрын",
+    loadMore: "Тағы жүктеу",
+    comments: "Пікірлер",
+    addComment: "Пікір жаз...",
+    firstComment: "Бірінші пікір жаз!",
+    send: "Жіберу",
+  },
+
+  create: {
+    placeholder: "Не жаңалық бар?",
+    addPhoto: "Фото қосу",
+    addVideo: "Видео қосу",
+    suggestCaption: "✨ ЖИ-мен жазу",
+    publish: "Жариялау",
+    publishing: "Жариялануда...",
+    sentToModeration: "Пост модерацияға жіберілді",
+    published: "Жарияланды!",
+  },
+
+  announcements: {
+    title: "Мектеп хабарландырулары",
+    pinned: "Бекітілген",
+    sport: "Спорт",
+    academic: "Оқу",
+    events: "Іс-шаралар",
+    general: "Жалпы",
+    empty: "Хабарландыру жоқ",
+  },
+
+  admin: {
+    dashboard: "Басқару панелі",
+    users: "Қолданушылар",
+    moderation: "Модерация",
+    stats: "Статистика",
+    totalStudents: "Барлық оқушылар",
+    postsThisWeek: "Апта ішіндегі посттар",
+    pendingModeration: "Модерацияда",
+    createAnnouncement: "Хабарландыру жасау",
+    titleField: "Тақырып",
+    bodyField: "Мәтін",
+    category: "Санат",
+    pinToFeed: "Лентаға бекіту",
+    publish: "Жариялау",
+    ban: "Бұғаттау",
+    unban: "Бұғаттан шығару",
+    approve: "Мақұлдау",
+    reject: "Қабылдамау",
+  },
+
+  assistant: {
+    greeting: "Сәлем! Мен Аки — оқуда көмекшіңмін",
+    placeholder: "Маған сұрақ қой...",
+    newChat: "Жаңа чат",
+    myChats: "Менің чаттарым",
+    send: "Жіберу",
+  },
+
+  profile: {
+    followers: "Жазылушылар",
+    following: "Жазылымдар",
+    follow: "Жазылу",
+    unfollow: "Бас тарту",
+    edit: "Профильді өзгерту",
+    save: "Сақтау",
+    bio: "Өзім туралы",
+    empty: "Әзірге пост жоқ",
+  },
+
+  errors: {
+    generic: "Бірдеңе дұрыс болмады",
+    retry: "Қайта көр",
+    offline: "Байланыс жоқ",
+    notFound: "Бет табылмады",
+    forbidden: "Кіруге тыйым салынған",
+    moderation: "Постта тыйым салынған мазмұн бар",
+  },
+
+  toasts: {
+    done: "Дайын!",
+    saved: "Сақталды",
+    deleted: "Жойылды",
+    copied: "Көшірілді",
+    welcome: "Úlgi-ге қош келдіңіз!",
+  },
+
+  meta: {
+    title: "Úlgi — Мектеп әлеуметтік желісі",
+    titleTemplate: "%s | Úlgi",
+    description:
+      "Úlgi — сенің мектебіңнің әлеуметтік желісі. Сәттерді бөліс, сыныптастарыңмен сөйлес, ЖИ-көмекшімен оқы.",
+    ogTitle: "Úlgi — Мектеп әлеуметтік желісі",
+    ogDescription:
+      "Сәттерді бөліс, сыныптастарыңмен сөйлес, ЖИ-көмекшімен оқы.",
+    siteName: "Úlgi",
+  },
+
+  home: {
+    heading: "Úlgi-ге қош келдің",
+    subheading:
+      "Мектебіңнің әлеуметтік желісі — сәттерді бөліс, сөйлес және бірге оқы.",
+    loginButton: "Кіру",
+    learnMore: "Толығырақ",
+    logoAlt: "Úlgi логотипі",
+  },
+} as const;
+
+export type Locale = typeof kk;

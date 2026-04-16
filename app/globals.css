@@ -39,82 +39,70 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+  --radius-3xl: 32px;
+  --radius-4xl: 36px;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* Duolingo palette */
+  --duo-green: #58CC02;
+  --duo-green-dark: #43C000;
+  --duo-green-light: #BFF199;
+  --duo-green-bg: #F0FBE4;
+  --duo-blue: #1CB0F6;
+  --duo-blue-dark: #1899D6;
+  --duo-blue-bg: #DDF4FF;
+  --duo-orange: #FF9600;
+  --duo-orange-dark: #E58600;
+  --duo-orange-bg: #FFF3E0;
+  --duo-red: #FF4B4B;
+  --duo-red-dark: #E53838;
+  --duo-red-bg: #FFF0F0;
+  --duo-purple: #CE82FF;
+  --duo-purple-dark: #A560E8;
+  --duo-purple-bg: #F3E8FF;
+  --duo-yellow: #FFC800;
+  --duo-yellow-bg: #FFFDE7;
+  --duo-white: #FFFFFF;
+  --duo-bg: #F7F7F7;
+  --duo-border: #E5E5E5;
+  --duo-border-thick: #D1D1D1;
+  --duo-text: #4B4B4B;
+  --duo-text-secondary: #AFAFAF;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Map to shadcn variables */
+  --background: #F7F7F7;
+  --foreground: #4B4B4B;
+  --card: #FFFFFF;
+  --card-foreground: #4B4B4B;
+  --popover: #FFFFFF;
+  --popover-foreground: #4B4B4B;
+  --primary: #58CC02;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F0F0F0;
+  --secondary-foreground: #4B4B4B;
+  --muted: #F0F0F0;
+  --muted-foreground: #AFAFAF;
+  --accent: #DDF4FF;
+  --accent-foreground: #1CB0F6;
+  --destructive: #FF4B4B;
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #1CB0F6;
+  --radius: 16px;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #4B4B4B;
+  --sidebar-primary: #1CB0F6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #DDF4FF;
+  --sidebar-accent-foreground: #1CB0F6;
+  --sidebar-border: #E5E5E5;
+  --sidebar-ring: #1CB0F6;
 }
 
 @layer base {
@@ -122,9 +110,111 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[var(--duo-bg)] text-[var(--duo-text)];
   }
   html {
     @apply font-sans;
   }
+}
+
+/* ═══ Duolingo button system ═══ */
+.btn-duo {
+  @apply relative inline-flex items-center justify-center gap-2 font-bold text-base tracking-wide uppercase transition-all duration-100;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+}
+.btn-duo:active {
+  transform: translateY(2px);
+}
+.btn-duo-green {
+  background: var(--duo-green);
+  color: white;
+  border: none;
+  border-bottom: 4px solid var(--duo-green-dark);
+}
+.btn-duo-green:hover { background: var(--duo-green-dark); }
+.btn-duo-green:active { border-bottom-width: 2px; }
+.btn-duo-green:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-duo-white {
+  background: white;
+  color: var(--duo-text);
+  border: 2px solid var(--duo-border);
+  border-bottom: 4px solid var(--duo-border-thick);
+}
+.btn-duo-white:hover { background: #FAFAFA; }
+.btn-duo-white:active { border-bottom-width: 2px; }
+
+.btn-duo-red {
+  background: var(--duo-red);
+  color: white;
+  border: none;
+  border-bottom: 4px solid var(--duo-red-dark);
+}
+.btn-duo-red:hover { background: var(--duo-red-dark); }
+.btn-duo-red:active { border-bottom-width: 2px; }
+
+.btn-duo-blue {
+  background: var(--duo-blue);
+  color: white;
+  border: none;
+  border-bottom: 4px solid var(--duo-blue-dark);
+}
+.btn-duo-blue:hover { background: var(--duo-blue-dark); }
+.btn-duo-blue:active { border-bottom-width: 2px; }
+
+.btn-duo-purple {
+  background: var(--duo-purple);
+  color: white;
+  border: none;
+  border-bottom: 4px solid var(--duo-purple-dark);
+}
+.btn-duo-purple:hover { background: var(--duo-purple-dark); }
+.btn-duo-purple:active { border-bottom-width: 2px; }
+
+/* ═══ Duolingo card ═══ */
+.card-duo {
+  background: var(--duo-white);
+  border: 2px solid var(--duo-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+/* ═══ Duolingo input ═══ */
+.input-duo {
+  @apply w-full text-base font-semibold;
+  padding: 14px 16px;
+  color: var(--duo-text);
+  background: white;
+  border: 2px solid var(--duo-border);
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s;
+}
+.input-duo:focus {
+  outline: none;
+  border-color: var(--duo-blue);
+  box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.2);
+}
+.input-duo::placeholder {
+  color: var(--duo-text-secondary);
+  font-weight: 400;
+}
+
+/* ═══ Duolingo badge ═══ */
+.badge-duo {
+  @apply inline-flex items-center font-bold text-xs uppercase tracking-wider;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+/* ═══ Like animation ═══ */
+@keyframes like-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+.like-active {
+  animation: like-pop 0.3s ease;
 }
