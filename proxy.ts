@@ -2,9 +2,28 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 const AUTH_ROUTES = ["/login", "/register"];
-const PROTECTED_ROUTES = ["/feed", "/announcements", "/create", "/assistant", "/profile", "/post", "/complete-profile", "/admin"];
+const PROTECTED_ROUTES = [
+  "/feed",
+  "/announcements",
+  "/create",
+  "/assistant",
+  "/profile",
+  "/post",
+  "/complete-profile",
+  "/admin",
+];
 
 export async function proxy(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const isAuthRoute = AUTH_ROUTES.some((p) => path === p || path.startsWith(`${p}/`));
+  const isProtectedRoute = PROTECTED_ROUTES.some((p) => path === p || path.startsWith(`${p}/`));
+
+  // Бесплатный fast-path: если роут не защищён и не auth — Supabase вообще не дёргаем.
+  // Срабатывает на /, /api/*, /_next/data/* и т.п. — экономит сетевой round-trip к auth.
+  if (!isProtectedRoute && !isAuthRoute) {
+    return NextResponse.next({ request });
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -28,13 +47,11 @@ export async function proxy(request: NextRequest) {
     }
   );
 
+  // getUser() делает сетевой вызов в Supabase auth — нужен только когда реально решаем
+  // редирект, иначе getSession() читает только cookie и работает мгновенно.
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const path = request.nextUrl.pathname;
-  const isAuthRoute = AUTH_ROUTES.some((p) => path === p || path.startsWith(`${p}/`));
-  const isProtectedRoute = PROTECTED_ROUTES.some((p) => path === p || path.startsWith(`${p}/`));
 
   if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();

@@ -47,27 +47,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
+    // last-known userId — чтобы не дёргать fetchProfile повторно если пользователь тот же.
+    // onAuthStateChange срабатывает синхронно после getSession (TOKEN_REFRESHED, INITIAL_SESSION),
+    // и без дедупа мы делали 2 одинаковых запроса в profiles.
+    let lastUserId: string | null = null;
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    async function syncFromSession(session: { user: { id: string } } | null) {
       if (!active) return;
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const p = await fetchProfile(session.user.id);
+      const u = session?.user ?? null;
+      setUser(u as User | null);
+      if (!u) {
+        lastUserId = null;
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+      if (u.id !== lastUserId) {
+        lastUserId = u.id;
+        const p = await fetchProfile(u.id);
         if (active) setProfile(p);
       }
       if (active) setLoading(false);
-    });
+    }
 
-    const { data: sub } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (!active) return;
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const p = await fetchProfile(session.user.id);
-        if (active) setProfile(p);
-      } else {
-        setProfile(null);
-      }
-      setLoading(false);
+    supabase.auth.getSession().then(({ data }) => syncFromSession(data.session));
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      syncFromSession(session);
     });
 
     return () => {
