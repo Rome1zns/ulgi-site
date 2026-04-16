@@ -61,13 +61,47 @@ export async function createAnnouncement(input: CreateAnnouncementInput) {
   return data;
 }
 
-export async function deleteAnnouncement(id: string) {
+export async function deleteAnnouncement(id: string, mediaPublicId?: string | null) {
   const { error } = await supabase
     .from("announcements")
     .delete()
     .eq("id", id);
 
   if (error) throw error;
+
+  // Чистим Cloudinary в фоне (не блокируем UI)
+  if (mediaPublicId) {
+    fetch("/api/media/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ publicId: mediaPublicId }),
+    }).catch((e) => console.warn("[announcements] cloudinary cleanup:", e));
+  }
+}
+
+export interface UpdateAnnouncementInput {
+  title?: string;
+  content?: string;
+  category?: "event" | "sport" | "academic" | "general";
+  is_pinned?: boolean;
+  media_url?: string | null;
+  media_type?: "image" | "video" | "none" | null;
+  media_public_id?: string | null;
+  event_date?: string | null;
+  event_time?: string | null;
+  event_location?: string | null;
+}
+
+export async function updateAnnouncement(id: string, input: UpdateAnnouncementInput) {
+  const { data, error } = await supabase
+    .from("announcements")
+    .update(input)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
 }
 
 export async function togglePinAnnouncement(id: string, isPinned: boolean) {

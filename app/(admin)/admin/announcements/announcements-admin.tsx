@@ -6,13 +6,14 @@ import {
   createAnnouncement,
   deleteAnnouncement,
   getAllAnnouncements,
+  togglePinAnnouncement,
 } from "@/lib/supabase/queries/announcements";
 import type { Announcement } from "@/types/db";
 import { uploadToCloudinary } from "@/lib/cloudinary/upload";
 import { Badge } from "@/components/ui/badge";
 import { kk } from "@/lib/locale/kk";
 import { ANNOUNCEMENT_CATEGORIES, type AnnouncementCategory } from "@/lib/constants";
-import { Plus, Trash2, Pin, X, ImagePlus } from "lucide-react";
+import { Plus, Trash2, Pin, PinOff, X, ImagePlus } from "lucide-react";
 
 interface Props {
   initialAnnouncements: Announcement[];
@@ -93,16 +94,28 @@ export function AnnouncementsAdmin({ initialAnnouncements, onChanged }: Props) {
     }
   }
 
-  async function handleDelete(id: string) {
+  async function handleDelete(ann: Announcement) {
     if (!confirm("Хабарландыруды жоюға сенімдісіз бе?")) return;
     try {
-      await deleteAnnouncement(id);
-      const next = items.filter((a) => a.id !== id);
+      await deleteAnnouncement(ann.id, ann.media_public_id);
+      const next = items.filter((a) => a.id !== ann.id);
       setItems(next);
       onChanged?.(next);
     } catch (err) {
       console.error("Delete announcement:", err);
       alert("Жою қатесі");
+    }
+  }
+
+  async function handleTogglePin(ann: Announcement) {
+    try {
+      const updated = await togglePinAnnouncement(ann.id, ann.is_pinned);
+      const next = items.map((a) => (a.id === ann.id ? (updated as Announcement) : a));
+      setItems(next);
+      onChanged?.(next);
+    } catch (err) {
+      console.error("Toggle pin:", err);
+      alert("Бекіту қатесі");
     }
   }
 
@@ -220,9 +233,26 @@ export function AnnouncementsAdmin({ initialAnnouncements, onChanged }: Props) {
                 <td className="px-4 py-3 text-[var(--duo-text-secondary)]">{a.media_url ? (a.media_type === "video" ? "🎬" : "📷") : "—"}</td>
                 <td className="px-4 py-3 text-xs text-[var(--duo-text-secondary)]">{a.event_date || "—"}</td>
                 <td className="px-4 py-3 text-right">
-                  <button onClick={() => handleDelete(a.id)} className="rounded-[var(--radius-sm)] p-2 hover:bg-[var(--duo-red-bg)]">
-                    <Trash2 className="h-4 w-4 text-[var(--duo-red)]" />
-                  </button>
+                  <div className="flex justify-end gap-1">
+                    <button
+                      onClick={() => handleTogglePin(a)}
+                      className="rounded-[var(--radius-sm)] p-2 hover:bg-[var(--duo-yellow-bg)]"
+                      title={a.is_pinned ? "Бекітуді алу" : "Бекіту"}
+                    >
+                      {a.is_pinned ? (
+                        <PinOff className="h-4 w-4 text-[var(--duo-orange)]" />
+                      ) : (
+                        <Pin className="h-4 w-4 text-[var(--duo-text-secondary)]" />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => handleDelete(a)}
+                      className="rounded-[var(--radius-sm)] p-2 hover:bg-[var(--duo-red-bg)]"
+                      title="Жою"
+                    >
+                      <Trash2 className="h-4 w-4 text-[var(--duo-red)]" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
