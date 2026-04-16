@@ -88,7 +88,11 @@ export function AnnouncementsAdmin({ initialAnnouncements, onChanged }: Props) {
       await refresh();
     } catch (err) {
       console.error("Create announcement error:", err);
-      setError("Жасау қатесі");
+      const detail =
+        err instanceof Error ? err.message :
+        typeof err === "object" && err && "message" in err ? String((err as { message: unknown }).message) :
+        JSON.stringify(err);
+      setError("Жасау қатесі: " + detail);
     } finally {
       setSaving(false); setUploading(false);
     }
