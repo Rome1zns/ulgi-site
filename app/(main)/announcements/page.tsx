@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 import { getAllAnnouncements } from "@/lib/supabase/queries/announcements";
 import type { Announcement } from "@/types/db";
+import { useAuth } from "@/lib/contexts/auth-context";
 import { kk } from "@/lib/locale/kk";
 import { optimizeUrl } from "@/lib/cloudinary/upload";
 
@@ -21,6 +24,8 @@ function formatDate(dateStr: string): string {
 }
 
 export default function AnnouncementsPage() {
+  const { profile } = useAuth();
+  const isAdmin = profile?.role === "admin";
   const [items, setItems] = useState<Announcement[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [active, setActive] = useState("all");
@@ -53,7 +58,14 @@ export default function AnnouncementsPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-extrabold text-[var(--duo-text)]">{kk.announcements.title}</h1>
+      <div className="flex items-center justify-between gap-3">
+        <h1 className="text-xl font-extrabold text-[var(--duo-text)]">{kk.announcements.title}</h1>
+        {isAdmin && (
+          <Link href="/admin/announcements" className="btn-duo btn-duo-green gap-1.5 !text-xs !py-2 !px-3">
+            <Plus className="h-4 w-4" /> Жасау
+          </Link>
+        )}
+      </div>
 
       <div className="flex flex-wrap gap-2">
         {CATEGORIES.map((c) => (
