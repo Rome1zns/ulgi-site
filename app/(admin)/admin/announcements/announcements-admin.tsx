@@ -205,7 +205,7 @@ export function AnnouncementsAdmin({ initialAnnouncements, onChanged }: Props) {
 
           {error && <p className="text-sm font-bold text-[var(--duo-red)]">{error}</p>}
 
-          <button onClick={handleCreate} disabled={saving || !title.trim() || !content.trim()} className="btn-duo btn-duo-green w-full">
+          <button onClick={handleCreate} disabled={saving} className="btn-duo btn-duo-green w-full">
             {saving ? kk.create.publishing : kk.admin.publish}
           </button>
         </div>
