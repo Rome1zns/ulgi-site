@@ -33,41 +33,55 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      const email = phoneToEmail(phone);
-      const fullPhone = `+7${phone}`;
-
-      // Сервер ставит profile-строку через триггер handle_new_user —
-      // читает поля из raw_user_meta_data, поэтому шлём их тут.
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            phone: fullPhone,
-            full_name: fullName.trim(),
-            class_name: className,
-          },
-        },
+      // Регистрация через серверный endpoint с service_role —
+      // обходит Supabase email rate limit (2/hr), который бьёт всех
+      // когда одновременно регаются несколько новых юзеров.
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone,
+          password,
+          full_name: fullName.trim(),
+          class_name: className,
+        }),
       });
 
-      if (signUpError) {
-        console.error("[register] signUp error:", signUpError);
-        const msg = signUpError.message.toLowerCase();
-        if (msg.includes("already") || msg.includes("registered") || msg.includes("exists")) {
-          setError(kk.auth.phoneExists);
-        } else if (msg.includes("password")) {
-          setError(kk.auth.passwordTooShort);
-        } else if (msg.includes("email") || msg.includes("invalid")) {
-          setError("Телефон нөмірі қате форматта");
-        } else if (msg.includes("signups") || msg.includes("disabled")) {
-          setError("Тіркелу уақытша жабық");
-        } else {
-          setError(kk.errors.generic + ": " + signUpError.message);
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        switch (data.error) {
+          case "phone_taken":
+            setError(kk.auth.phoneExists);
+            break;
+          case "password_too_short":
+            setError(kk.auth.passwordTooShort);
+            break;
+          case "phone_invalid":
+            setError("Телефон нөмірі қате форматта");
+            break;
+          case "name_required":
+          case "class_required":
+            setError(kk.auth.requiredField);
+            break;
+          default:
+            setError(kk.errors.generic + ": " + (data.error || res.status));
         }
         return;
       }
 
-      // Триггер уже создал строку в profiles. Идём настраивать username/аватар.
+      // Получаем сессию — логинимся только что созданным юзером.
+      const { error: signInErr } = await supabase.auth.signInWithPassword({
+        email: phoneToEmail(phone),
+        password,
+      });
+
+      if (signInErr) {
+        console.error("[register] signIn after create:", signInErr);
+        setError(kk.errors.generic);
+        return;
+      }
+
       router.push("/complete-profile");
       router.refresh();
     } catch (err) {
