@@ -293,3 +293,12 @@ Known context:
 
 Next recommended step:
 Run Prompt 4/4 — Student Interface & Final QA.
+
+Deployment audit and Netlify deployment task:
+- audited current hosting state;
+- confirmed localhost is not production;
+- checked GitHub remote;
+- checked Netlify CLI status;
+- prepared/updated netlify.toml;
+- checked env variables without exposing secrets;
+- deployed to Netlify production.

@@ -112,7 +112,7 @@ export function AdminAssignmentForm() {
       case "class_required":
         return kk.auth.requiredField;
       default:
-        return kk.assignments.createError;
+        return message || kk.assignments.createError;
     }
   }
 
@@ -155,10 +155,14 @@ export function AdminAssignmentForm() {
       router.push(`/admin/assignments/${assignment.id}`);
     } catch (submitError) {
       console.error("[assignments/create]", submitError);
-      const message =
-        submitError instanceof Error
-          ? mapErrorMessage(submitError.message)
-          : kk.assignments.createError;
+      let errMsg = "";
+      if (submitError instanceof Error) {
+        errMsg = submitError.message;
+      } else if (submitError && typeof submitError === "object" && "message" in submitError) {
+        errMsg = String(submitError.message);
+      }
+      
+      const message = errMsg ? mapErrorMessage(errMsg) : kk.assignments.createError;
       setError(message);
       toast.error(message);
     } finally {
