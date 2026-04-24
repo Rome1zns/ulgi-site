@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Bell, PlusCircle, Bot, User, Shield } from "lucide-react";
+import { Home, Bell, PlusCircle, Bot, User, Shield, ListChecks } from "lucide-react";
 import { kk } from "@/lib/locale/kk";
 
 const items = [
   { href: "/feed", icon: Home, label: kk.nav.feed },
   { href: "/announcements", icon: Bell, label: kk.nav.announcements },
+  { href: "/assignments", icon: ListChecks, label: kk.nav.assignments },
   { href: "/create", icon: PlusCircle, label: kk.nav.create },
   { href: "/assistant", icon: Bot, label: kk.nav.assistant },
   { href: "/profile", icon: User, label: kk.nav.profile },
@@ -17,9 +18,9 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r-2 border-[var(--duo-border)] bg-white md:flex">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r-2 border-[var(--duo-border)] bg-[var(--duo-white)] md:flex">
       <div className="flex h-16 items-center px-6">
-        <Link href="/feed" className="text-2xl font-extrabold text-[var(--duo-green)]">Úlgi</Link>
+        <Link href="/feed" className="text-2xl font-extrabold text-[var(--duo-green)]">Sunlife</Link>
       </div>
       <nav className="flex-1 space-y-1 px-3 py-4">
         {items.map(({ href, icon: Icon, label }) => {

@@ -12,7 +12,11 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+    process.env.NEXT_PUBLIC_APP_URL ||
+      process.env.URL ||
+      process.env.DEPLOY_PRIME_URL ||
+      process.env.RENDER_EXTERNAL_URL ||
+      "http://localhost:3000"
   ),
   title: {
     default: kk.meta.title,
@@ -35,9 +39,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kk" className={nunito.variable}>
-      <head>
-        <meta charSet="utf-8" />
-      </head>
       <body className="min-h-dvh font-sans antialiased">
         {children}
         <Toaster richColors position="top-center" />

@@ -228,7 +228,7 @@ export function AnnouncementsAdmin({ initialAnnouncements, onChanged }: Props) {
           </thead>
           <tbody className="divide-y divide-[var(--duo-border)]">
             {items.map((a) => (
-              <tr key={a.id} className="bg-white">
+              <tr key={a.id} className="bg-[var(--duo-white)]">
                 <td className="px-4 py-3 font-bold text-[var(--duo-text)]">
                   {a.is_pinned && <Pin className="mr-1 inline h-3 w-3 text-[var(--duo-yellow)]" />}
                   {a.title}

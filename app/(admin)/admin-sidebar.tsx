@@ -2,13 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, Bell, Users, ShieldCheck, FileText, ArrowLeft } from "lucide-react";
+import {
+  BarChart3,
+  Bell,
+  Users,
+  ShieldCheck,
+  FileText,
+  ArrowLeft,
+  ListChecks,
+} from "lucide-react";
 import { kk } from "@/lib/locale/kk";
 
 const items = [
   { href: "/admin", icon: BarChart3, label: kk.admin.stats, exact: true },
   { href: "/admin/posts", icon: FileText, label: "Посттар" },
   { href: "/admin/announcements", icon: Bell, label: kk.nav.announcements },
+  { href: "/admin/assignments", icon: ListChecks, label: kk.assignments.title },
   { href: "/admin/users", icon: Users, label: kk.admin.users },
   { href: "/admin/moderation", icon: ShieldCheck, label: kk.admin.moderation },
 ];
@@ -17,7 +26,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r-2 border-[var(--duo-border)] bg-white md:flex">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r-2 border-[var(--duo-border)] bg-[var(--duo-white)] md:flex">
       <div className="flex h-16 items-center px-6">
         <span className="text-lg font-extrabold text-[var(--duo-text)]">{kk.admin.dashboard}</span>
       </div>

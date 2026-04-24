@@ -23,6 +23,34 @@ export const ANNOUNCEMENT_CATEGORIES = [
 
 export type AnnouncementCategory = (typeof ANNOUNCEMENT_CATEGORIES)[number]["value"];
 
+export const ASSIGNMENT_CATEGORIES = [
+  { value: "testing", label: "Тестілеу" },
+  { value: "ubt_preparation", label: "ҰБТ-ға дайындық" },
+  { value: "homework", label: "Үй тапсырмасы" },
+  { value: "olympiad", label: "Олимпиада" },
+  { value: "control_work", label: "Бақылау жұмысы" },
+  { value: "quarter_tasks", label: "Тоқсандық тапсырмалар" },
+] as const;
+
+export type AssignmentCategory = (typeof ASSIGNMENT_CATEGORIES)[number]["value"];
+
+export const ASSIGNMENT_STATUSES = [
+  { value: "draft", label: "Жоба" },
+  { value: "published", label: "Жарияланды" },
+  { value: "archived", label: "Архив" },
+] as const;
+
+export type AssignmentStatus = (typeof ASSIGNMENT_STATUSES)[number]["value"];
+
+export const ASSIGNMENT_SUBMISSION_STATUSES = [
+  { value: "submitted", label: "Жіберілді" },
+  { value: "auto_checked", label: "Автоматты тексерілді" },
+  { value: "reviewed", label: "Тексерілді" },
+] as const;
+
+export type AssignmentSubmissionStatus =
+  (typeof ASSIGNMENT_SUBMISSION_STATUSES)[number]["value"];
+
 export const USER_ROLES = ["student", "teacher", "admin"] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 

@@ -61,7 +61,7 @@ export function PostMenu({ postId, authorId, mediaPublicId, mediaType, onDeleted
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-10 z-20 min-w-[180px] overflow-hidden rounded-[var(--radius-md)] border-2 border-[var(--duo-border)] bg-white py-1">
+          <div className="absolute right-0 top-10 z-20 min-w-[180px] overflow-hidden rounded-[var(--radius-md)] border-2 border-[var(--duo-border)] bg-[var(--duo-white)] py-1">
             {canDelete && (
               <button onClick={handleDelete} disabled={deleting}
                 className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-bold text-[var(--duo-red)] transition-all hover:bg-[var(--duo-red-bg)] disabled:opacity-50">

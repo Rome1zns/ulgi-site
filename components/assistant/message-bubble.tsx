@@ -20,7 +20,7 @@ export function MessageBubble({ role, content }: MessageBubbleProps) {
       <div className={`max-w-[80%] rounded-[var(--radius-lg)] px-4 py-3 text-sm leading-relaxed ${
         isUser
           ? "bg-[var(--duo-green-bg)] border-2 border-[var(--duo-green-light)] text-[var(--duo-text)]"
-          : "bg-white border-2 border-[var(--duo-border)] border-l-4 border-l-[var(--duo-purple)] text-[var(--duo-text)]"
+          : "bg-[var(--duo-white)] border-2 border-[var(--duo-border)] border-l-4 border-l-[var(--duo-purple)] text-[var(--duo-text)]"
       }`}>
         {isUser ? (
           <p className="whitespace-pre-wrap font-semibold">{content}</p>

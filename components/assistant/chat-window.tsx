@@ -162,7 +162,7 @@ export function ChatWindow({ chatId }: ChatWindowProps) {
           </div>
         )}
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="border-t-2 border-[var(--duo-border)] bg-white p-4">
+      <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="border-t-2 border-[var(--duo-border)] bg-[var(--duo-white)] p-4">
         <div className="flex gap-2">
           <input
             value={input}

@@ -10,6 +10,7 @@ const PROTECTED_ROUTES = [
   "/profile",
   "/post",
   "/complete-profile",
+  "/assignments",
   "/admin",
 ];
 

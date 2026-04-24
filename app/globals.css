@@ -49,60 +49,86 @@
 }
 
 :root {
-  /* Duolingo palette */
-  --duo-green: #58CC02;
-  --duo-green-dark: #43C000;
-  --duo-green-light: #BFF199;
-  --duo-green-bg: #F0FBE4;
-  --duo-blue: #1CB0F6;
-  --duo-blue-dark: #1899D6;
-  --duo-blue-bg: #DDF4FF;
-  --duo-orange: #FF9600;
-  --duo-orange-dark: #E58600;
-  --duo-orange-bg: #FFF3E0;
-  --duo-red: #FF4B4B;
-  --duo-red-dark: #E53838;
-  --duo-red-bg: #FFF0F0;
-  --duo-purple: #CE82FF;
-  --duo-purple-dark: #A560E8;
-  --duo-purple-bg: #F3E8FF;
-  --duo-yellow: #FFC800;
-  --duo-yellow-bg: #FFFDE7;
-  --duo-white: #FFFFFF;
-  --duo-bg: #F7F7F7;
-  --duo-border: #E5E5E5;
-  --duo-border-thick: #D1D1D1;
-  --duo-text: #4B4B4B;
-  --duo-text-secondary: #AFAFAF;
+  /* Sunlife palette */
+  --sun-primary: #F59E0B;
+  --sun-primary-dark: #D97706;
+  --sun-primary-light: #FCD34D;
+  --sun-primary-bg: #FEF3C7;
+  --sun-accent: #B45309;
+  --sun-accent-dark: #92400E;
+  --sun-accent-bg: #FFEDD5;
+  --sun-highlight: #F97316;
+  --sun-highlight-dark: #EA580C;
+  --sun-highlight-bg: #FFF1E6;
+  --sun-soft: #FB923C;
+  --sun-soft-dark: #EA580C;
+  --sun-soft-bg: #FFF4E8;
+  --sun-danger: #DC2626;
+  --sun-danger-dark: #B91C1C;
+  --sun-danger-bg: #FEE2E2;
+  --sun-warning: #FACC15;
+  --sun-warning-bg: #FEF3C7;
+  --sun-surface: #FFFDF8;
+  --sun-background: #FFF7ED;
+  --sun-border: #E9D7C1;
+  --sun-border-strong: #DBBD99;
+  --sun-text: #5B4633;
+  --sun-text-secondary: #A88A6B;
+
+  /* Keep existing variable names as aliases to avoid touching logic-heavy UI. */
+  --duo-green: var(--sun-primary);
+  --duo-green-dark: var(--sun-primary-dark);
+  --duo-green-light: var(--sun-primary-light);
+  --duo-green-bg: var(--sun-primary-bg);
+  --duo-blue: var(--sun-accent);
+  --duo-blue-dark: var(--sun-accent-dark);
+  --duo-blue-bg: var(--sun-accent-bg);
+  --duo-orange: var(--sun-highlight);
+  --duo-orange-dark: var(--sun-highlight-dark);
+  --duo-orange-bg: var(--sun-highlight-bg);
+  --duo-red: var(--sun-danger);
+  --duo-red-dark: var(--sun-danger-dark);
+  --duo-red-bg: var(--sun-danger-bg);
+  --duo-purple: var(--sun-soft);
+  --duo-purple-dark: var(--sun-soft-dark);
+  --duo-purple-bg: var(--sun-soft-bg);
+  --duo-yellow: var(--sun-warning);
+  --duo-yellow-bg: var(--sun-warning-bg);
+  --duo-white: var(--sun-surface);
+  --duo-bg: var(--sun-background);
+  --duo-border: var(--sun-border);
+  --duo-border-thick: var(--sun-border-strong);
+  --duo-text: var(--sun-text);
+  --duo-text-secondary: var(--sun-text-secondary);
 
   /* Map to shadcn variables */
-  --background: #F7F7F7;
-  --foreground: #4B4B4B;
-  --card: #FFFFFF;
-  --card-foreground: #4B4B4B;
-  --popover: #FFFFFF;
-  --popover-foreground: #4B4B4B;
-  --primary: #58CC02;
+  --background: var(--sun-background);
+  --foreground: var(--sun-text);
+  --card: var(--sun-surface);
+  --card-foreground: var(--sun-text);
+  --popover: var(--sun-surface);
+  --popover-foreground: var(--sun-text);
+  --primary: var(--sun-primary);
   --primary-foreground: #FFFFFF;
-  --secondary: #F0F0F0;
-  --secondary-foreground: #4B4B4B;
-  --muted: #F0F0F0;
-  --muted-foreground: #AFAFAF;
-  --accent: #DDF4FF;
-  --accent-foreground: #1CB0F6;
-  --destructive: #FF4B4B;
-  --border: #E5E5E5;
-  --input: #E5E5E5;
-  --ring: #1CB0F6;
+  --secondary: #F8EBDD;
+  --secondary-foreground: var(--sun-text);
+  --muted: #F8EBDD;
+  --muted-foreground: var(--sun-text-secondary);
+  --accent: #FFF1D8;
+  --accent-foreground: var(--sun-accent);
+  --destructive: var(--sun-danger);
+  --border: var(--sun-border);
+  --input: var(--sun-border);
+  --ring: var(--sun-primary);
   --radius: 16px;
-  --sidebar: #FFFFFF;
-  --sidebar-foreground: #4B4B4B;
-  --sidebar-primary: #1CB0F6;
+  --sidebar: var(--sun-surface);
+  --sidebar-foreground: var(--sun-text);
+  --sidebar-primary: var(--sun-primary);
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #DDF4FF;
-  --sidebar-accent-foreground: #1CB0F6;
-  --sidebar-border: #E5E5E5;
-  --sidebar-ring: #1CB0F6;
+  --sidebar-accent: #FFF1D8;
+  --sidebar-accent-foreground: var(--sun-accent);
+  --sidebar-border: var(--sun-border);
+  --sidebar-ring: var(--sun-primary);
 }
 
 @layer base {
@@ -111,6 +137,8 @@
   }
   body {
     @apply bg-[var(--duo-bg)] text-[var(--duo-text)];
+    background-image: radial-gradient(circle at top, #fff2cf 0%, var(--duo-bg) 34%, var(--duo-white) 100%);
+    background-attachment: fixed;
   }
   html {
     @apply font-sans;
@@ -139,12 +167,12 @@
 .btn-duo-green:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 .btn-duo-white {
-  background: white;
+  background: var(--duo-white);
   color: var(--duo-text);
   border: 2px solid var(--duo-border);
   border-bottom: 4px solid var(--duo-border-thick);
 }
-.btn-duo-white:hover { background: #FAFAFA; }
+.btn-duo-white:hover { background: #FFF9F2; }
 .btn-duo-white:active { border-bottom-width: 2px; }
 
 .btn-duo-red {
@@ -180,6 +208,7 @@
   border: 2px solid var(--duo-border);
   border-radius: var(--radius-lg);
   padding: 20px;
+  box-shadow: 0 18px 35px -28px rgb(180 83 9 / 0.42);
 }
 
 /* ═══ Duolingo input ═══ */
@@ -187,15 +216,15 @@
   @apply w-full text-base font-semibold;
   padding: 14px 16px;
   color: var(--duo-text);
-  background: white;
+  background: var(--duo-white);
   border: 2px solid var(--duo-border);
   border-radius: var(--radius-md);
   transition: border-color 0.2s;
 }
 .input-duo:focus {
   outline: none;
-  border-color: var(--duo-blue);
-  box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.2);
+  border-color: var(--duo-green);
+  box-shadow: 0 0 0 3px rgb(245 158 11 / 0.18);
 }
 .input-duo::placeholder {
   color: var(--duo-text-secondary);

@@ -51,7 +51,7 @@ export function ModerationAdmin({ initialPosts, onChanged }: Props) {
   return (
     <div className="space-y-4">
       {posts.map((post) => (
-        <div key={post.id} className="rounded-2xl border bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+        <div key={post.id} className="rounded-2xl border-2 border-[var(--duo-border)] bg-[var(--duo-white)] p-4 dark:border-zinc-800 dark:bg-zinc-900">
           <div className="mb-2 flex items-center justify-between">
             <div>
               <span className="text-sm font-semibold">{post.author?.full_name || "Белгісіз"}</span>

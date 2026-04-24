@@ -131,6 +131,146 @@ export type Database = {
         };
         Update: Partial<Database["public"]["Tables"]["announcements"]["Insert"]>;
       };
+      assignments: {
+        Row: {
+          id: string;
+          title: string;
+          description: string | null;
+          category:
+            | "testing"
+            | "ubt_preparation"
+            | "homework"
+            | "olympiad"
+            | "control_work"
+            | "quarter_tasks";
+          target_class_name: string;
+          status: "draft" | "published" | "archived";
+          created_by: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          description?: string | null;
+          category:
+            | "testing"
+            | "ubt_preparation"
+            | "homework"
+            | "olympiad"
+            | "control_work"
+            | "quarter_tasks";
+          target_class_name: string;
+          status?: "draft" | "published" | "archived";
+          created_by: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["assignments"]["Insert"]>;
+      };
+      assignment_questions: {
+        Row: {
+          id: string;
+          assignment_id: string;
+          question_text: string;
+          order_index: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          assignment_id: string;
+          question_text: string;
+          order_index?: number;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["assignment_questions"]["Insert"]>;
+      };
+      assignment_options: {
+        Row: {
+          id: string;
+          question_id: string;
+          label: string;
+          option_text: string;
+          order_index: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          question_id: string;
+          label: string;
+          option_text: string;
+          order_index?: number;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["assignment_options"]["Insert"]>;
+      };
+      assignment_answer_keys: {
+        Row: {
+          id: string;
+          question_id: string;
+          correct_option_id: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          question_id: string;
+          correct_option_id: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["assignment_answer_keys"]["Insert"]>;
+      };
+      assignment_submissions: {
+        Row: {
+          id: string;
+          assignment_id: string;
+          student_id: string;
+          status: "submitted" | "auto_checked" | "reviewed";
+          total_questions: number;
+          auto_score: number;
+          final_score: number | null;
+          admin_feedback: string | null;
+          reviewed_by: string | null;
+          reviewed_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          assignment_id: string;
+          student_id: string;
+          status?: "submitted" | "auto_checked" | "reviewed";
+          total_questions?: number;
+          auto_score?: number;
+          final_score?: number | null;
+          admin_feedback?: string | null;
+          reviewed_by?: string | null;
+          reviewed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["assignment_submissions"]["Insert"]>;
+      };
+      assignment_answers: {
+        Row: {
+          id: string;
+          submission_id: string;
+          question_id: string;
+          selected_option_id: string;
+          is_correct: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          submission_id: string;
+          question_id: string;
+          selected_option_id: string;
+          is_correct?: boolean;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["assignment_answers"]["Insert"]>;
+      };
       follows: {
         Row: {
           follower_id: string;
@@ -187,6 +327,15 @@ export type Database = {
       media_type: "none" | "image" | "video";
       moderation_status: "approved" | "pending" | "rejected";
       announcement_category: "event" | "sport" | "academic" | "general";
+      assignment_category:
+        | "testing"
+        | "ubt_preparation"
+        | "homework"
+        | "olympiad"
+        | "control_work"
+        | "quarter_tasks";
+      assignment_status: "draft" | "published" | "archived";
+      assignment_submission_status: "submitted" | "auto_checked" | "reviewed";
       ai_role: "user" | "assistant";
     };
   };

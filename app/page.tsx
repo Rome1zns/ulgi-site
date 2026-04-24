@@ -9,7 +9,7 @@ export default function Home() {
       <div className="w-full max-w-sm card-duo p-8 text-center">
         <div className="mb-4 text-6xl">🏫</div>
         <h1 className="mb-1 text-5xl font-extrabold text-[var(--duo-green)]">
-          Úlgi
+          {kk.meta.siteName}
         </h1>
         <p className="mb-8 text-base font-semibold text-[var(--duo-text-secondary)]">
           {kk.meta.siteName}

@@ -1,6 +1,6 @@
-# Úlgi — Мектеп әлеуметтік желісі
+# Sunlife — Мектеп әлеуметтік желісі
 
-Úlgi — мектеп оқушылары мен мұғалімдеріне арналған әлеуметтік желі.
+Sunlife — мектеп оқушылары мен мұғалімдеріне арналған әлеуметтік желі.
 Сәттерді бөліс, сыныптастарыңмен сөйлес, AI-көмекшімен оқы.
 
 ## Стек
@@ -41,6 +41,8 @@
    - Folder: `ulgi`
    - Имя пресета (например `ulgi_media`)
 
+Технические имена `ulgi` для Cloudinary можно оставить как есть, если проект уже использует эти пути в медиа-логике.
+
 ### 3. OpenAI API Key
 
 Создай ключ на [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
@@ -61,6 +63,7 @@ NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=...
 NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=ulgi_media
 CLOUDINARY_API_KEY=...
 CLOUDINARY_API_SECRET=...
+NEXT_PUBLIC_SCHOOL_NAME=Sunlife мектебі
 ```
 
 ### 5. Запуск
@@ -79,11 +82,66 @@ npm run dev
 3. Поменяй `role` на `admin`
 4. Теперь `/admin` доступен
 
-## Деплой на Vercel
+## Deploy Sunlife Copy to Netlify
 
-1. Подключи репозиторий к [Vercel](https://vercel.com)
-2. Добавь все переменные из `.env.local` в Environment Variables
-3. Deploy
+Эта Sunlife-копия предназначена для деплоя на Netlify Free, не на Vercel.
+
+### Build settings
+
+- Build command: `npm run build`
+- Publish directory: `.next`
+- Node version: `20`
+
+### Environment variables
+
+Добавь в Netlify Site Settings → Environment variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+OPENAI_API_KEY=
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+NEXT_PUBLIC_SCHOOL_NAME=Sunlife мектебі
+```
+
+`NEXT_PUBLIC_APP_URL` можно не задавать: на Netlify приложение умеет брать production URL из встроенных переменных `URL` / `DEPLOY_PRIME_URL`. Если хочешь явно зафиксировать canonical URL, можешь добавить `NEXT_PUBLIC_APP_URL` вручную уже после создания Netlify site.
+
+### Recommended safe workflow
+
+Чтобы не привязать Sunlife-копию к исходному GitHub/Vercel-проекту, safest path такой:
+
+```bash
+npx netlify login
+npx netlify link
+npx netlify deploy --build --prod
+```
+
+1. Сначала создай **отдельный новый site/project в Netlify dashboard** для Sunlife.
+2. Добавь туда environment variables из списка выше.
+3. Только потом выполни `npx netlify link` в этой папке и выбери новый Sunlife site.
+4. После привязки запусти production deploy.
+
+### Optional Git-connected workflow
+
+Если ты заранее создал **отдельный GitHub repo именно для Sunlife-копии**, тогда можно использовать и Git-integrated сценарий:
+
+```bash
+npx netlify login
+npx netlify init
+npx netlify deploy --build --prod
+```
+
+Не используй `netlify init` против текущего `origin`, если он всё ещё указывает на исходный репозиторий: так можно случайно связать новый Netlify site с оригинальным проектом.
+
+Если хочешь импортировать переменные через CLI, не импортируй `.env.local` вслепую, если там `NEXT_PUBLIC_APP_URL=http://localhost:3000`. Либо убери эту строку из импортируемого файла, либо добавь production URL отдельно после создания сайта.
+
+## Оригинальный Vercel-деплой
+
+`vercel.json` и связанные настройки не удалялись, чтобы не затронуть исходный сайт. Для Sunlife-копии Vercel использовать не нужно.
 
 ## Структура проекта
 

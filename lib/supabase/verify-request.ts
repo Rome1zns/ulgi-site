@@ -4,6 +4,7 @@ export interface VerifiedAuth {
   userId: string;
   role: string | null;
   isAdmin: boolean;
+  className: string | null;
 }
 
 /**
@@ -29,7 +30,7 @@ export async function verifySupabaseAuth(request: Request): Promise<VerifiedAuth
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role, is_banned")
+    .select("role, is_banned, class_name")
     .eq("id", data.user.id)
     .maybeSingle();
 
@@ -40,5 +41,6 @@ export async function verifySupabaseAuth(request: Request): Promise<VerifiedAuth
     userId: data.user.id,
     role,
     isAdmin: role === "admin",
+    className: profile?.class_name ?? null,
   };
 }

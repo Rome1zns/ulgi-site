@@ -22,7 +22,7 @@ export function AssistantClient({
   return (
     <div className="-mx-4 -my-6 flex h-[calc(100dvh-5rem)] md:h-[calc(100dvh-3rem)]">
       {/* Chat list — desktop sidebar */}
-      <div className="hidden w-72 shrink-0 border-r bg-white dark:border-zinc-800 dark:bg-zinc-950 md:block">
+      <div className="hidden w-72 shrink-0 border-r border-[var(--duo-border)] bg-[var(--duo-white)] dark:border-zinc-800 dark:bg-zinc-950 md:block">
         <ChatList
           chats={chats}
           activeChatId={activeChatId}
@@ -37,8 +37,8 @@ export function AssistantClient({
           <ChatWindow chatId={activeChatId} />
         ) : (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 dark:bg-violet-900">
-              <Bot className="h-8 w-8 text-violet-600 dark:text-violet-300" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--duo-purple-bg)]">
+              <Bot className="h-8 w-8 text-[var(--duo-purple)]" />
             </div>
             <div>
               <p className="text-lg font-medium">{kk.assistant.greeting}</p>

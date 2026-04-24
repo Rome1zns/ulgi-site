@@ -118,16 +118,16 @@ export default function CompleteProfilePage() {
       <span className="text-muted-foreground">{kk.auth.checkingUsername}</span>
     ),
     available: (
-      <span className="text-green-600">{kk.auth.usernameAvailable}</span>
+      <span className="text-[var(--duo-green)]">{kk.auth.usernameAvailable}</span>
     ),
     taken: (
-      <span className="text-red-500">{kk.auth.usernameTaken}</span>
+      <span className="text-[var(--duo-red)]">{kk.auth.usernameTaken}</span>
     ),
   }[usernameStatus];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="rounded-2xl bg-white p-6 shadow-sm dark:bg-zinc-900">
+      <div className="rounded-2xl border-2 border-[var(--duo-border)] bg-[var(--duo-white)] p-6 shadow-sm dark:bg-zinc-900">
         <h2 className="mb-6 text-xl font-semibold">{kk.auth.completeTitle}</h2>
 
         <div className="space-y-5">
@@ -136,7 +136,7 @@ export default function CompleteProfilePage() {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-zinc-100 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+              className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-[var(--duo-bg)] transition-colors hover:bg-[var(--duo-green-bg)] dark:bg-zinc-800 dark:hover:bg-zinc-700"
             >
               {avatarPreview ? (
                 <Image
@@ -200,7 +200,7 @@ export default function CompleteProfilePage() {
           </div>
 
           {error && (
-            <p className="text-sm text-red-500">{error}</p>
+            <p className="text-sm text-[var(--duo-red)]">{error}</p>
           )}
 
           <Button

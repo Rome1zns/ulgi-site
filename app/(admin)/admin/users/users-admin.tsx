@@ -59,9 +59,9 @@ export function UsersAdmin({ initialUsers, onChanged }: Props) {
         />
       </div>
 
-      <div className="overflow-hidden rounded-2xl border dark:border-zinc-800">
+      <div className="overflow-hidden rounded-2xl border-2 border-[var(--duo-border)] dark:border-zinc-800">
         <table className="w-full text-sm">
-          <thead className="bg-zinc-50 dark:bg-zinc-900">
+          <thead className="bg-[var(--duo-bg)] dark:bg-zinc-900">
             <tr>
               <th className="px-4 py-3 text-left font-medium">{kk.auth.fullName}</th>
               <th className="px-4 py-3 text-left font-medium">Username</th>
@@ -70,7 +70,7 @@ export function UsersAdmin({ initialUsers, onChanged }: Props) {
               <th className="px-4 py-3 text-right font-medium" />
             </tr>
           </thead>
-          <tbody className="divide-y dark:divide-zinc-800">
+          <tbody className="divide-y divide-[var(--duo-border)] dark:divide-zinc-800">
             {filtered.map((u) => {
               const initials = u.full_name
                 .split(" ")
@@ -80,7 +80,7 @@ export function UsersAdmin({ initialUsers, onChanged }: Props) {
                 .toUpperCase();
 
               return (
-                <tr key={u.id} className="bg-white dark:bg-zinc-950">
+                <tr key={u.id} className="bg-[var(--duo-white)] dark:bg-zinc-950">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <Avatar className="h-8 w-8">
