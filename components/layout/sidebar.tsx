@@ -20,7 +20,7 @@ export function Sidebar() {
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r-2 border-[var(--duo-border)] bg-[var(--duo-white)] md:flex">
       <div className="flex h-16 items-center px-6">
-        <Link href="/feed" className="text-2xl font-extrabold text-[var(--duo-green)]">Sunlife</Link>
+        <Link href="/feed" className="text-2xl font-extrabold text-[var(--duo-green)]">Úlgi</Link>
       </div>
       <nav className="flex-1 space-y-1 px-3 py-4">
         {items.map(({ href, icon: Icon, label }) => {

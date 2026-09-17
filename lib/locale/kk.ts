@@ -197,27 +197,27 @@ export const kk = {
     saved: "Сақталды",
     deleted: "Жойылды",
     copied: "Көшірілді",
-    welcome: "Sunlife-ке қош келдіңіз!",
+    welcome: "Úlgi-ге қош келдіңіз!",
   },
 
   meta: {
-    title: "Sunlife — Мектеп әлеуметтік желісі",
-    titleTemplate: "%s | Sunlife",
+    title: "Úlgi — Мектеп әлеуметтік желісі",
+    titleTemplate: "%s | Úlgi",
     description:
-      "Sunlife — сенің мектебіңнің әлеуметтік желісі. Сәттерді бөліс, сыныптастарыңмен сөйлес, ЖИ-көмекшімен оқы.",
-    ogTitle: "Sunlife — Мектеп әлеуметтік желісі",
+      "Úlgi — сенің мектебіңнің әлеуметтік желісі. Сәттерді бөліс, сыныптастарыңмен сөйлес, ЖИ-көмекшімен оқы.",
+    ogTitle: "Úlgi — Мектеп әлеуметтік желісі",
     ogDescription:
       "Сәттерді бөліс, сыныптастарыңмен сөйлес, ЖИ-көмекшімен оқы.",
-    siteName: "Sunlife",
+    siteName: "Úlgi",
   },
 
   home: {
-    heading: "Sunlife-ке қош келдің",
+    heading: "Úlgi-ге қош келдің",
     subheading:
       "Мектебіңнің әлеуметтік желісі — сәттерді бөліс, сөйлес және бірге оқы.",
     loginButton: "Кіру",
     learnMore: "Толығырақ",
-    logoAlt: "Sunlife логотипі",
+    logoAlt: "Úlgi логотипі",
   },
 } as const;
 
