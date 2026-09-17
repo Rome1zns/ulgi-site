@@ -1,7 +1,12 @@
 import { supabase } from "@/lib/supabase/client";
 import { MOCK_ANNOUNCEMENTS } from "@/lib/data/mock-data";
+import { isDemoSessionActive } from "@/lib/auth/demo";
 
 export async function getAllAnnouncements(limit = 50) {
+  if (isDemoSessionActive()) {
+    return MOCK_ANNOUNCEMENTS.slice(0, limit);
+  }
+
   try {
     const { data, error } = await supabase
       .from("announcements")
@@ -20,6 +25,10 @@ export async function getAllAnnouncements(limit = 50) {
 }
 
 export async function getPinnedAnnouncements(limit = 5) {
+  if (isDemoSessionActive()) {
+    return MOCK_ANNOUNCEMENTS.filter((a) => a.is_pinned).slice(0, limit);
+  }
+
   try {
     const { data, error } = await supabase
       .from("announcements")

@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import { MOCK_POSTS } from "@/lib/data/mock-data";
+import { isDemoSessionActive } from "@/lib/auth/demo";
 
 const POST_AUTHOR_SELECT = `
   *,
@@ -9,19 +10,26 @@ const POST_AUTHOR_SELECT = `
 `;
 
 export async function getFeedPosts(limit = 20) {
+  if (isDemoSessionActive()) {
+    return MOCK_POSTS.slice(0, limit);
+  }
+
   try {
-    const { data, error } = await supabase
+    const timeoutPromise = new Promise<{ data: null; error: Error }>((resolve) =>
+      setTimeout(() => resolve({ data: null, error: new Error("timeout") }), 1500)
+    );
+    const fetchPromise = supabase
       .from("posts")
       .select(POST_AUTHOR_SELECT)
       .eq("moderation_status", "approved")
       .order("created_at", { ascending: false })
       .limit(limit);
 
-    if (error) throw error;
-    if (data && data.length > 0) return data;
+    const res: any = await Promise.race([fetchPromise, timeoutPromise]);
+    if (res?.error) throw res.error;
+    if (res?.data && res.data.length > 0) return res.data;
     return MOCK_POSTS.slice(0, limit);
   } catch (err) {
-    console.warn("[posts] fallback to mock posts:", err);
     return MOCK_POSTS.slice(0, limit);
   }
 }
