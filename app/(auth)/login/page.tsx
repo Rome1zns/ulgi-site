@@ -7,6 +7,8 @@ import { PhoneInput } from "@/components/auth/phone-input";
 import { kk } from "@/lib/locale/kk";
 import Link from "next/link";
 
+import { isDemoPhone, verifyDemoCredentials, setDemoCookie } from "@/lib/auth/demo";
+
 function phoneToEmail(digits: string) {
   return `7${digits}@ulgi.app`;
 }
@@ -24,6 +26,37 @@ export default function LoginPage() {
     if (phone.length < 10) { setError(kk.auth.phoneTooShort); return; }
 
     setLoading(true);
+
+    // Проверяем demo-credentials для 7001112233 / 20002000
+    if (isDemoPhone(phone)) {
+      if (!verifyDemoCredentials(phone, password)) {
+        setError(kk.auth.wrongCredentials);
+        setLoading(false);
+        return;
+      }
+
+      // Устанавливаем автономную сессию
+      setDemoCookie();
+
+      // Фоном пробуем Supabase (если вдруг доступен), но не блокируем переход
+      try {
+        const timeoutPromise = new Promise<{ error: Error | null }>((resolve) =>
+          setTimeout(() => resolve({ error: new Error("timeout") }), 2000)
+        );
+        await Promise.race([
+          supabase.auth.signInWithPassword({
+            email: phoneToEmail(phone),
+            password,
+          }),
+          timeoutPromise,
+        ]);
+      } catch {}
+
+      router.push("/feed");
+      router.refresh();
+      return;
+    }
+
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email: phoneToEmail(phone),

@@ -18,11 +18,19 @@ function formatPhone(digits: string) {
   return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6, 8)}-${d.slice(8)}`;
 }
 
+function normalizePhoneDigits(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 11 && (digits.startsWith("7") || digits.startsWith("8"))) {
+    return digits.slice(1);
+  }
+  return digits.slice(0, 10);
+}
+
 export function PhoneInput({ value, onChange, placeholder, disabled }: PhoneInputProps) {
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const raw = e.target.value.replace(/\D/g, "");
-      if (raw.length <= 10) onChange(raw);
+      const normalized = normalizePhoneDigits(e.target.value);
+      onChange(normalized);
     },
     [onChange]
   );

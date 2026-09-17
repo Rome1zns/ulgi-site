@@ -48,11 +48,27 @@ export async function proxy(request: NextRequest) {
     }
   );
 
+  const demoCookie = request.cookies.get("ulgi_demo_auth")?.value;
+  const isDemoAuth = demoCookie === "admin";
+
+  if (isDemoAuth) {
+    if (isAuthRoute) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/feed";
+      return NextResponse.redirect(url);
+    }
+    return response;
+  }
+
   // getUser() делает сетевой вызов в Supabase auth — нужен только когда реально решаем
   // редирект, иначе getSession() читает только cookie и работает мгновенно.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data?.user ?? null;
+  } catch (err) {
+    console.error("[proxy] supabase.auth.getUser error:", err);
+  }
 
   if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();

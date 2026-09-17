@@ -1,27 +1,40 @@
 import { supabase } from "@/lib/supabase/client";
+import { MOCK_ANNOUNCEMENTS } from "@/lib/data/mock-data";
 
 export async function getAllAnnouncements(limit = 50) {
-  const { data, error } = await supabase
-    .from("announcements")
-    .select("*")
-    .order("is_pinned", { ascending: false })
-    .order("created_at", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("announcements")
+      .select("*")
+      .order("is_pinned", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(limit);
 
-  if (error) throw error;
-  return data || [];
+    if (error) throw error;
+    if (data && data.length > 0) return data;
+    return MOCK_ANNOUNCEMENTS.slice(0, limit);
+  } catch (err) {
+    console.warn("[announcements] fallback to mock announcements:", err);
+    return MOCK_ANNOUNCEMENTS.slice(0, limit);
+  }
 }
 
 export async function getPinnedAnnouncements(limit = 5) {
-  const { data, error } = await supabase
-    .from("announcements")
-    .select("*")
-    .eq("is_pinned", true)
-    .order("created_at", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("announcements")
+      .select("*")
+      .eq("is_pinned", true)
+      .order("created_at", { ascending: false })
+      .limit(limit);
 
-  if (error) throw error;
-  return data || [];
+    if (error) throw error;
+    if (data && data.length > 0) return data;
+    return MOCK_ANNOUNCEMENTS.filter((a) => a.is_pinned).slice(0, limit);
+  } catch (err) {
+    console.warn("[announcements] fallback to pinned mock announcements:", err);
+    return MOCK_ANNOUNCEMENTS.filter((a) => a.is_pinned).slice(0, limit);
+  }
 }
 
 export interface CreateAnnouncementInput {

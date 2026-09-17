@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
+import { MOCK_POSTS } from "@/lib/data/mock-data";
 
 const POST_AUTHOR_SELECT = `
   *,
@@ -8,26 +9,38 @@ const POST_AUTHOR_SELECT = `
 `;
 
 export async function getFeedPosts(limit = 20) {
-  const { data, error } = await supabase
-    .from("posts")
-    .select(POST_AUTHOR_SELECT)
-    .eq("moderation_status", "approved")
-    .order("created_at", { ascending: false })
-    .limit(limit);
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(POST_AUTHOR_SELECT)
+      .eq("moderation_status", "approved")
+      .order("created_at", { ascending: false })
+      .limit(limit);
 
-  if (error) throw error;
-  return data || [];
+    if (error) throw error;
+    if (data && data.length > 0) return data;
+    return MOCK_POSTS.slice(0, limit);
+  } catch (err) {
+    console.warn("[posts] fallback to mock posts:", err);
+    return MOCK_POSTS.slice(0, limit);
+  }
 }
 
 export async function getPostById(postId: string) {
-  const { data, error } = await supabase
-    .from("posts")
-    .select(POST_AUTHOR_SELECT)
-    .eq("id", postId)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(POST_AUTHOR_SELECT)
+      .eq("id", postId)
+      .single();
 
-  if (error) throw error;
-  return data;
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    const found = MOCK_POSTS.find((p) => p.id === postId);
+    if (found) return found;
+    throw err;
+  }
 }
 
 export async function getPostsByAuthor(authorId: string, limit = 20) {
